@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+<div class="app-title">Biblioverso</div>
+
+<div class="botoes">
+<button id="btn-minimizar">―</button>
+<button id="btn-maximizar">☐</button>
+<button id="btn-fechar">X</button>
+</div>
+</header>
+
+<div class="main">
+
+<div class="sidebar">
+
+<h2>Biblioteca</h2>
+
+
+<button data-tela="livros">Livros</button>
+<button data-tela="usuarios">Usuários</button>
+<button data-tela="emprestimos">Empréstimos</button>
+
+</div>
+
+<div class="conteudo">
+
+<!-- LOGIN -->
+ <div id="login" class="tela ativa">
+
+    <input id="emailLogin" placeholder="Email">
+    <input id="senhaLogin" placeholder="Senha">
+    <button id="logar">Login</button>
+    <p>Você não tem uma conta?</p><button id="Cadastro"> Cadastre-se</button>
+
+ </div>
+
+<!-- CADASTRO -->
+ <div id="cadastro" class="tela">
+
+    <input id="nomeUsuarioCadastro" placeholder="Nome de usuário">
+    <input id="emailCadastro" placeholder="Email">
+    <input id="senhaCadastro" placeholder="Senha">
+    <input id="telefoneCadastro" placeholder="Telefone">
+    <input id="senhaConfirmCadastro" placeholder="Confirmar senha">
+    <p>Você já tem uma conta?</p><button> Login</button>
+
+ </div>
+
+ <!-- PERFIL -->
+  <div id="perfil" class="tela">
+
+  </div>
+
+<!-- LIVROS -->
+
+<div id="livros" class="tela">
+
+<h1>Livros</h1>
+
+<form id="formLivro">
+
+<input id="livro_id" type="hidden">
+
+<input id="titulo" placeholder="Título">
+<input id="autor" placeholder="Autor">
+<input id="isbn" placeholder="ISBN">
+<input id="quantidade_total" placeholder="Total">
+<input id="quantidade_disponivel" placeholder="Disponível">
+
+<button type="submit">Salvar</button>
+
+</form>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Título</th>
+<th>Autor</th>
+<th>Disponível</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody id="listaLivros"></tbody>
+
+</table>
+
+</div>
+
+<!-- USUARIOS -->
+
+<div id="usuarios" class="tela">
+
+<h1>Usuários</h1>
+
+<form id="formUsuario">
+
+<input id="usuario_id" type="hidden">
+
+<input id="nomeUsuario" placeholder="Nome">
+<input id="emailUsuario" placeholder="Email">
+<input id="telefoneUsuario" placeholder="Telefone">
+
+<button type="submit">Salvar</button>
+
+</form>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Email</th>
+<th>Telefone</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody id="listaUsuarios"></tbody>
+
+</table>
+
+</div>
+
+<!-- EMPRESTIMOS -->
+
+<div id="emprestimos" class="tela">
+
+<h1>Empréstimos</h1>
+
+<form id="formEmprestimo">
+
+<input id="usuario_id_emprestimo" placeholder="ID Usuário">
+<input id="livro_id_emprestimo" placeholder="ID Livro">
+<input id="data_prevista_devolucao" type="date">
+
+<button type="submit">Registrar</button>
+
+</form>
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Usuário</th>
+<th>Livro</th>
+<th>Data Prevista</th>
+<th>Status</th>
+<th>Data Devolvida</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody id="listaEmprestimos"></tbody>
+
+</table>
+</div>
+</div>
+</div>
+
+<script src="renderer.js"></script>
+
+</body>
+</html>
