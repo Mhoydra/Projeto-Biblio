@@ -1,29 +1,20 @@
 console.log("renderer carregou")
 
 function mostrarTela(nome){
-
-document.querySelectorAll(".tela").forEach(t=>t.classList.remove("ativa"))
-
-document.getElementById(nome)?.classList.add("ativa")
-
+    document.querySelectorAll(".tela").forEach(t=>t.classList.remove("ativa"))
+    document.getElementById(nome)?.classList.add("ativa")
 }
 
 document.querySelectorAll(".sidebar button").forEach(botao=>{
-
-botao.addEventListener("click",()=>{
-
-mostrarTela(botao.dataset.tela)
-
-})
-
+    botao.addEventListener("click",()=>{
+        mostrarTela(botao.dataset.tela)
+    })
 })
 
 document.addEventListener("DOMContentLoaded",()=>{
-
-carregarLivros()
-carregarUsuarios()
-carregarEmprestimos()
-
+    carregarLivros()
+    carregarUsuarios()
+    carregarEmprestimos()
 })
 
 /* LIVROS */
