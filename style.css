@@ -42,7 +42,7 @@ background-color:gray;
 background-color:red;
 }
 
-#perfil{
+#perfil.tela.ativa{
     display: flex;
     flex-direction: column;
     justify-content: center;
