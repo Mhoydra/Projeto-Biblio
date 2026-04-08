@@ -42,6 +42,63 @@ background-color:gray;
 background-color:red;
 }
 
+#perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#nome_perfil_usuario{
+    margin-bottom: 0%;
+}
+
+#email_perfil_usuario{
+    margin-bottom: 40px;
+}
+
+#estatisticas{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    padding: 6px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+#status_criacoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#status_titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+}
+#status_amizades{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#estatisticas div{
+    margin: 0px 15px;
+}
+
+.fotoPerfil{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 200px;
+}
+
+#amizade{
+    width: 80px;
+    border-radius: 50%;
+    margin: 0px 15px;
+}
+
 /* CONTAINER PRINCIPAL */
 
 .main{
