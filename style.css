@@ -99,6 +99,103 @@ background-color:red;
     margin: 0px 15px;
 }
 
+/* CRIACAO */
+
+#cabeca_criacao{
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+section{
+    padding: 20px;
+    margin-top: 30px;
+    border: 10px solid black;
+    border-radius: 30px;
+}
+
+#foto_perfil_criacao{
+    border-radius: 100%;
+    border: 2px solid #1f2937;
+}
+
+#foto_perfil_criacao:hover{
+    scale: 120%;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.carousel::-webkit-scrollbar-button {
+  display: none; 
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.creation {
+  min-width: 40px;
+  height: 200px;
+  
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+}
+
+.creation:hover{
+    scale: 110%;
+}
+
+#categoria_classicos .creation{
+    background: #81dd89;
+}
+
+#categoria_inimigos_criaturas .creation{
+    background: #ddb281;
+}
+
+#categoria_ideias_inspiracoes .creation{
+    background: #81acdd;
+}
+
+#categoria_filmes_series .creation{
+    background: #c081dd;
+}
+
+.title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: bold;
+}
+
+.botao_criacao{
+    border: 1px solid rgb(65, 53, 175);
+    border-radius: 10px;
+    padding: 6px;
+    background-color: #0e6ef5;
+    color: #ffffff;
+}
+
+
+.botao_criacao:hover{
+    scale: 110%;
+}
+
+
+
 /* CONTAINER PRINCIPAL */
 
 .main{
