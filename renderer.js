@@ -1,63 +1,59 @@
 console.log("renderer carregou")
 
 function mostrarTela(nome){
-
-document.querySelectorAll(".tela").forEach(t=>t.classList.remove("ativa"))
-
-document.getElementById(nome)?.classList.add("ativa")
-
+    document.querySelectorAll(".tela").forEach(t=>t.classList.remove("ativa"))
+    document.getElementById(nome)?.classList.add("ativa")
 }
 
-document.querySelectorAll(".sidebar button").forEach(botao=>{
-
-botao.addEventListener("click",()=>{
-
-mostrarTela(botao.dataset.tela)
-
+document.querySelectorAll("[data-tela]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    mostrarTela(btn.dataset.tela)
+  })
 })
 
+document.getElementById("logar").addEventListener("click", () => {
+  document.getElementById("sidebar").style.display = "block"
+  mostrarTela("perfil")
 })
+
+document.query
 
 document.addEventListener("DOMContentLoaded",()=>{
-
-carregarLivros()
-carregarUsuarios()
-carregarEmprestimos()
-
+    carregarLivros()
+    carregarUsuarios()
+    carregarEmprestimos()
 })
 
 /* LIVROS */
 
 async function carregarLivros(){
+    const livros = await window.api.listarLivros()
+    const tabela = document.getElementById("listaLivros")
 
-const livros = await window.api.listarLivros()
+    tabela.innerHTML=""
 
-const tabela = document.getElementById("listaLivros")
+    livros.forEach(l=>{
 
-tabela.innerHTML=""
+        tabela.innerHTML+=` 
+        <tr>
+        <td>${l.id}</td>
+        <td>${l.titulo}</td>
+        <td>${l.autor}</td>
+        <td>${l.quantidade_disponivel}</td>
+        <td>
 
-livros.forEach(l=>{
+        <button onclick="editarLivro(${l.id},'${l.titulo}','${l.autor}','${l.isbn}',${l.quantidade_total},${l.quantidade_disponivel})">
+        Editar
+        </button>
 
-    tabela.innerHTML+=` 
-    <tr>
-    <td>${l.id}</td>
-    <td>${l.titulo}</td>
-    <td>${l.autor}</td>
-    <td>${l.quantidade_disponivel}</td>
-    <td>
+        <button onclick="removerLivro(${l.id})">
+        Remover
+        </button>
 
-    <button onclick="editarLivro(${l.id},'${l.titulo}','${l.autor}','${l.isbn}',${l.quantidade_total},${l.quantidade_disponivel})">
-    Editar
-    </button>
-
-    <button onclick="removerLivro(${l.id})">
-    Remover
-    </button>
-
-    </td>
-    </tr>
-    `
-})
+        </td>
+        </tr>
+        `
+    })
 }
 
 async function removerLivro(id){

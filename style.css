@@ -108,14 +108,15 @@ flex:1;
 
 /* SIDEBAR */
 
-.sidebar{
+#sidebar{
+display: none;
 width:220px;
 background:#1f2937;
 color:white;
 padding:20px;
 }
 
-.sidebar button{
+#sidebar button{
 display:block;
 width:100%;
 margin-bottom:10px;
@@ -126,7 +127,7 @@ color:white;
 cursor:pointer;
 }
 
-.sidebar button:hover{
+#sidebar button:hover{
 background:#4b5563;
 }
 
