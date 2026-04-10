@@ -157,6 +157,7 @@ section{
 
 .creation:hover{
     scale: 110%;
+    cursor:pointer;
 }
 
 #categoria_classicos .creation{
@@ -192,6 +193,7 @@ section{
 
 .botao_criacao:hover{
     scale: 110%;
+    cursor:pointer;
 }
 
 
