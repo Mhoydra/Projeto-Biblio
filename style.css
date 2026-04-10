@@ -1,0 +1,364 @@
+*{
+box-sizing: border-box;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+margin:0;
+display:flex;
+flex-direction:column;
+height:100vh;
+}
+
+/* HEADER */
+
+header{
+background-color: rgb(31, 31, 31);
+height:30px;
+width:100%;
+-webkit-app-region: drag;
+display:flex;
+align-items:center;
+justify-content:space-between;
+color:white;
+padding:0 10px;
+}
+
+header button{
+background:transparent;
+color:white;
+border:none;
+-webkit-app-region:no-drag;
+cursor:pointer;
+height:30px;
+width:40px;
+}
+
+header button:hover{
+background-color:gray;
+}
+
+#btn-fechar:hover{
+background-color:red;
+}
+
+#perfil.tela.ativa{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#nome_perfil_usuario{
+    margin-bottom: 0%;
+}
+
+#email_perfil_usuario{
+    margin-bottom: 40px;
+}
+
+#estatisticas{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    padding: 6px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+#status_criacoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#status_titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 40px;
+}
+#status_amizades{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#estatisticas div{
+    margin: 0px 15px;
+}
+
+.fotoPerfil{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 200px;
+}
+
+#amizade{
+    width: 80px;
+    border-radius: 50%;
+    margin: 0px 15px;
+}
+
+/* CRIACAO */
+
+#cabeca_criacao{
+    background-color: #ffffff;
+    color: #1f2937;
+}
+
+section{
+    padding: 20px;
+    margin-top: 30px;
+    border: 10px solid black;
+    border-radius: 30px;
+}
+
+#foto_perfil_criacao{
+    border-radius: 100%;
+    border: 2px solid #1f2937;
+}
+
+#foto_perfil_criacao:hover{
+    scale: 120%;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.carousel::-webkit-scrollbar-button {
+  display: none; 
+}
+
+.carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.creation {
+  min-width: 40px;
+  height: 200px;
+  
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: start;
+}
+
+.creation:hover{
+    scale: 110%;
+    cursor:pointer;
+}
+
+#categoria_classicos .creation{
+    background: #81dd89;
+}
+
+#categoria_inimigos_criaturas .creation{
+    background: #ddb281;
+}
+
+#categoria_ideias_inspiracoes .creation{
+    background: #81acdd;
+}
+
+#categoria_filmes_series .creation{
+    background: #c081dd;
+}
+
+.title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-weight: bold;
+}
+
+.botao_criacao{
+    border: 1px solid rgb(65, 53, 175);
+    border-radius: 10px;
+    padding: 6px;
+    background-color: #0e6ef5;
+    color: #ffffff;
+}
+
+
+.botao_criacao:hover{
+    scale: 110%;
+    cursor:pointer;
+}
+
+
+
+/* CONTAINER PRINCIPAL */
+
+.main{
+display:flex;
+flex:1;
+}
+
+/* SIDEBAR */
+
+#sidebar{
+display: none;
+width:220px;
+background:#1f2937;
+color:white;
+padding:20px;
+}
+
+#sidebar button{
+display:block;
+width:100%;
+margin-bottom:10px;
+padding:10px;
+background:#374151;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+#sidebar button:hover{
+background:#4b5563;
+}
+
+/* CONTEUDO */
+
+.conteudo{
+flex:1;
+padding:30px;
+overflow:auto;
+}
+
+/* TELAS */
+
+.tela{
+display:none;
+}
+
+.tela.ativa{
+display:block;
+}
+
+/* TABELAS */
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+}
+
+th{
+background:#eee;
+}
+
+/* FORM */
+
+form input{
+margin:5px;
+padding:8px;
+}
+
+/*   LOGIN / CADASTRO */
+
+/* Fundo centralizado só quando estiver no login/cadastro */
+#login.tela.ativa,
+#cadastro.tela.ativa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card */
+#login,
+#cadastro {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    margin: auto;
+}
+
+/* Inputs */
+#login input,
+#cadastro input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#login input:focus,
+#cadastro input:focus {
+    border-color: #374151;
+}
+
+/* Botão principal */
+#login button:not([data-tela]),
+#cadastro button:not([data-tela]) {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #374151;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#login button:not([data-tela]):hover,
+#cadastro button:not([data-tela]):hover {
+    background: #1f2937;
+}
+
+/* Botão secundário (troca de tela) */
+#login button[data-tela],
+#cadastro button[data-tela] {
+    background: transparent;
+    color: #374151;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#login button[data-tela]:hover,
+#cadastro button[data-tela]:hover {
+    text-decoration: underline;
+}
+
+/* Texto */
+#login p,
+#cadastro p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Erro */
+#erroLogin {
+    margin-top: 8px;
+    font-size: 13px;
+    color: red;
+}
