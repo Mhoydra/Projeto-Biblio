@@ -21,46 +21,80 @@
 
 <div class="main">
 
-<div class="sidebar">
+<div id="sidebar">
 
 <h2>Biblioteca</h2>
 
-
-<button data-tela="livros">Suas Criações</button>
-<button data-tela="usuarios">Lista de Amizade</button>
-<button data-tela="emprestimos">Criações da Comunidade</button>
-<button data-tela="login">Login</button>
+<button data-tela="livros">Livros</button>
+<button data-tela="usuarios">Usuários</button>
+<button data-tela="emprestimos">Empréstimos</button>
+<button data-tela="perfil">Perfil</button>
 
 </div>
 
 <div class="conteudo">
 
 <!-- LOGIN -->
- <div id="login" class="tela ativa">
+ <div id="login" class="tela ativa"> 
 
-   <input id="emailLogin" placeholder="Email">
-   <input id="senhaLogin" placeholder="Senha">
-   <button id="logar">Login</button>
-   <p>Você não tem uma conta?</p><button id="Cadastro"> Cadastre-se</button>
+    <input id="emailLogin" placeholder="Email">
+    <input id="senhaLogin" placeholder="Senha">
+    <button id="logar">Login</button>
+    <p id="erroLogin" style="color:red; display:none;"></p>
+    <p>Você não tem uma conta?</p><button data-tela="cadastro"> Cadastre-se</button>
+
 
  </div>
 
 <!-- CADASTRO -->
  <div id="cadastro" class="tela">
 
-   <input id="nomeUsuarioCadastro" placeholder="Nome de usuário">
-   <input id="emailCadastro" placeholder="Email">
-   <input id="senhaCadastro" placeholder="Senha">
-   <input id="telefoneCadastro" placeholder="Telefone">
-   <input id="senhaConfirmCadastro" placeholder="Confirmar senha">
-   <p>Você já tem uma conta?</p><button> Login</button>
+    <input id="nomeUsuarioCadastro" placeholder="Nome de usuário">
+    <input id="emailCadastro" type="email" placeholder="Email">
+    <input id="senhaCadastro" placeholder="Senha">
+    <input id="telefoneCadastro" placeholder="Telefone">
+    <input id="senhaConfirmCadastro" placeholder="Confirmar senha">
+    <button id="cadastrar">Cadastrar</button>
+    <p>Você já tem uma conta?</p><button data-tela="login"> Login</button>
 
  </div>
 
  <!-- PERFIL -->
   <div id="perfil" class="tela">
-
+      <img class="fotoPerfil" src="./img/{F273C618-CEFA-4AAF-91C8-CDAF61BC94E8}.png" alt="foto de perfil">
+      <h2 id="nome_perfil_usuario">Nome completo do usuario</h2>
+      <p id="email_perfil_usuario">Email completo</p>
+      <div id="estatisticas">
+         <div id="status_criacoes">
+            <p>N° Criações</p>
+            <h2>10</h2>
+         </div>
+         <div id="status_titulo">
+            <p>Titulo</p>
+            <h2>Super Criador</h2>
+         </div>
+         <div id="status_amizades">
+            <p>Amizades</p>
+            <h2>3</h2>
+         </div>
+      </div>
+      <h3>Amigos</h3>
+      <div id="Amizades">
+         <img src="img/download.jpg" alt="amigo" id="amizade">
+         <img src="img/download (1).jpg" alt="" id="amizade">
+         <img src="img/1600w-ig8MN6MbRj4.webp" alt="" id="amizade">
+      </div>
+      <h3>Solicitação de amizade</h3>
+      <div id="Amizades">
+         
+         <img src="img/funny-dogs-pictures-apznf07dzfxrqcob.jpg" alt="" id="amizade">
+         <img src="img/d7031744329ce5aa20340619d21744cc.jpg" alt="" id="amizade">
+      </div>
   </div>
+
+<!-- CRIAÇÕES -->
+
+</div>
 
 <!-- LIVROS -->
 

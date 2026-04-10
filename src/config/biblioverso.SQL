@@ -3,10 +3,10 @@ USE biblioverso;
 
 CREATE TABLE usuarios (
     -- Valores com a necessidade de preenchimento
-    nomeUsuario VARCHAR(100) NOT NULL,
+    nomeUsuario VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL, 
     senha VARCHAR(255) NOT NULL, -- Senha usará bcrypt no futuro
-    telefone VARCHAR(20),
+    telefone VARCHAR(20) UNIQUE,
 
     -- Valores auto preenchiveis
     ativo BOOLEAN DEFAULT TRUE,
