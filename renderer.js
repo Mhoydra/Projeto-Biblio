@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded",()=>{
         const email = document.getElementById("emailCadastro").value
         const senha = document.getElementById("senhaCadastro").value
         const telefone = document.getElementById("telefoneCadastro").value
-
         const res = await window.api.criarUsuario({
             nome, email, senha, telefone
         })
