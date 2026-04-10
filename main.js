@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -9,11 +9,11 @@ function createWindow() {
         height: 800,
         frame: false,
         webPreferences: {
-        preload: path.join(__dirname, 'preload.js'),
-        contextIsolation: true,
-        nodeIntegration: false
-    }
-});
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
+            nodeIntegration: false
+        }
+    });
 
     mainWindow.loadFile('index.html');
 
@@ -27,6 +27,10 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
+
+// =========================
+// CONTROLE DA JANELA
+// =========================
 
 ipcMain.on('fechar', () => {
     if (mainWindow) mainWindow.close();
@@ -44,4 +48,4 @@ ipcMain.on('maximizar', () => {
     } else {
         mainWindow.maximize();
     }
-}); 
+});

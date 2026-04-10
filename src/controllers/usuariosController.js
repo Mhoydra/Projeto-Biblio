@@ -1,170 +1,163 @@
-const connection = require('../config/db');
+const db = require('../config/db') // ou '../db' dependendo do teu caminho
+const bcrypt = require('bcrypt')
 
-function listarUsuarios(req, res) {
-    connection.query('SELECT * FROM usuarios WHERE ativo = 1', (err, results) => {
+/* =========================
+   LISTAR USUÁRIOS
+========================= */
+async function listarUsuarios(req, res) {
+    try {
+        const [rows] = await db.execute(
+            'SELECT idUsuario, nomeUsuario, email, telefone, ativo, created_at FROM usuarios WHERE ativo = true'
+        )
 
-        //se erro
-        if (err) {
-            return res.status(500).json({
-                erro: 'erro ao buscar usuarios no banco'
-            });
+        res.json(rows)
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ erro: 'Erro ao buscar usuários' })
+    }
+}
+
+/* =========================
+   BUSCAR POR ID
+========================= */
+async function buscarPorIdUsuarios(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+
+        const [rows] = await db.execute(
+            'SELECT idUsuario, nomeUsuario, email, telefone, ativo, created_at FROM usuarios WHERE idUsuario = ? AND ativo = true',
+            [id]
+        )
+
+        if (rows.length === 0) {
+            return res.status(404).json({ erro: 'Usuário não encontrado' })
         }
 
-        //retorna os resultados encontrados
-        res.json(results);
-    })  
-};
+        res.json(rows[0])
 
-function buscarPorIdUsuarios(req, res) {
-    const id = parseInt(req.params.id);
-    
-    //executa SQL com filtro
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ erro: 'Erro ao buscar usuário' })
+    }
+}
 
-    connection.query(
-        'SELECT * FROM usuarios WHERE id = ? AND ativo = true',
-        [id],
-        (err, results) => {
-            if (err) {
-                return res.status(500).json({
-                    erro: 'Erro ao buscar usuario'
-                });
-            }
+/* =========================
+   CRIAR USUÁRIO (CADASTRO)
+========================= */
+async function criarUsuario(req, res) {
+    try {
+        const { nome, email, senha, telefone } = req.body
 
-            //se nao encontrar nenhuma tarefa
-            if (results.length === 0) {
-                return res.status(404).json({
-                    erro: 'Usuario não encontrada'
-                })
-            }
-
-            res.json(results[0]);
+        // validação básica
+        if (!nome || !email || !senha) {
+            return res.status(400).json({ erro: 'Preencha os campos obrigatórios' })
         }
-    );
-};
 
-function criarUsuario(req, res){
-    const { nome, email, telefone, ativo } = req.body;
+        // verificar duplicados
+        const [existe] = await db.execute(
+            'SELECT idUsuario FROM usuarios WHERE email = ? OR nomeUsuario = ? OR telefone = ?',
+            [email, nome, telefone]
+        )
 
-    //comando SQL para inserir dados no BD
-    const sql = 'INSERT INTO usuarios (nome, email, telefone, ativo, created_at) VALUES (?, ?, ?, ?, NOW())';
-
-    //executa o insert
-    connection.query(
-        sql,
-        [nome, email, telefone, ativo],
-        (err, result) => {
-
-            if (err) {
-                return res.status(500).json({
-                    erro: 'Erro ao criar usuário'
-                });
-            }
-
-            if (novoNome.trim() === '') {
-                return res.status(400).json({
-                    erro: 'O nome não pode ser vazio'
-                });
-            }
-
-
-            //retorna a tarefa criada
-
-            res.status(201).json({
-                id: result.insertId,
-                nome,
-                email,
-                telefone,
-                ativo
-            });
+        if (existe.length > 0) {
+            return res.json({ sucesso: false, erro: 'Usuário já cadastrado' })
         }
-    )
-};
 
-function atualizarUsuario(req, res) {
-    const id = parseInt(req.params.id);
-    const { nome, email, telefone, ativo } = req.body;
+        // hash da senha
+        const hash = await bcrypt.hash(senha, 10)
 
-    connection.query(
-        'SELECT * FROM usuarios WHERE id = ?',
-        [id],
-        (err, results) => {
-            //se houver erro na consulta
-            if (err) {
-                return res.status(500).json({
-                    erro: 'Erro ao buscar usuario no banco'
-                });
-            }
+        // insert
+        const [result] = await db.execute(
+            `INSERT INTO usuarios (nomeUsuario, email, senha, telefone)
+             VALUES (?, ?, ?, ?)`,
+            [nome, email, hash, telefone]
+        )
 
-            //se não encontrou tarefa com o id
-            if (results.length == 0) {
-                return res.status(404).json ({
-                    erro: 'usuario não encontrado'
-                });
-            }
-            //pega os dados da tarefa encontrada
-            const usuarioAtual = results[0];
+        res.status(201).json({
+            sucesso: true,
+            id: result.insertId
+        })
 
-            const novoNome = nome !== undefined ? nome : usuarioAtual.nome;
-            const novoEmail = email !== undefined ? email : usuarioAtual.email;
-            const novoTelefone = telefone !== undefined ? telefone : usuarioAtual.telefone;
-            const novoAtivo = ativo !== undefined ? ativo : usuarioAtual.ativo;
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ sucesso: false, erro: err.message })
+    }
+}
 
-            if (novoNome.trim() === '') {
-                return res.status(400).json({
-                    erro: 'O nome não pode ser vazio'
-                });
-            }
+/* =========================
+   ATUALIZAR USUÁRIO
+========================= */
+async function atualizarUsuario(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+        const { nome, email, telefone, ativo } = req.body
 
-            //executar o UPDATE no BD
-            connection.query(
-                'UPDATE usuarios SET nome = ?, email = ?, telefone = ?, ativo = ? WHERE id = ?', [novoNome, novoEmail, novoTelefone, novoAtivo, id], (err, result) => {
-                    if (err) {
-                        return res.status(500).json({
-                            erro: 'Erro ao atualizar usuario'
-                        });
-                    }
+        const [rows] = await db.execute(
+            'SELECT * FROM usuarios WHERE idUsuario = ?',
+            [id]
+        )
 
-                    if (result.affectedRows === 0) {
-                        return res.status(404).json({
-                            erro: 'usuario não encontrado para atualizar'
-                        });
-                    }
+        if (rows.length === 0) {
+            return res.status(404).json({ erro: 'Usuário não encontrado' })
+        }
 
-                    res.json({
-                        id,
-                        nome: novoNome,
-                        email: novoEmail,
-                        telefone: novoTelefone,
-                        ativo: novoAtivo,
-                    });
-        });
-                
-    });
-};
+        const usuarioAtual = rows[0]
 
-function removerUsuario(req, res) {
-    const id = parseInt(req.params.id);
+        const novoNome = nome ?? usuarioAtual.nomeUsuario
+        const novoEmail = email ?? usuarioAtual.email
+        const novoTelefone = telefone ?? usuarioAtual.telefone
+        const novoAtivo = ativo ?? usuarioAtual.ativo
 
-    connection.query(
-        'UPDATE usuarios SET ativo = false WHERE id = ? AND ativo = true',
-        [id],
-        (err, result) => {
-            if (err) {
-                return res.status(500).json({
-                    erro: 'Erro ao apagar usuário'
-                });
-            }
+        await db.execute(
+            `UPDATE usuarios 
+             SET nomeUsuario = ?, email = ?, telefone = ?, ativo = ?
+             WHERE idUsuario = ?`,
+            [novoNome, novoEmail, novoTelefone, novoAtivo, id]
+        )
 
-            if (result.affectedRows === 0) {
-                return res.status(404).json({
-                    erro: 'Usuário não encontrado ou já removido'
-                });
-            }
+        res.json({
+            id,
+            nome: novoNome,
+            email: novoEmail,
+            telefone: novoTelefone,
+            ativo: novoAtivo
+        })
 
-            res.json({
-                mensagem: 'Usuário removido com sucesso'
-            });
-        });
-};
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ erro: 'Erro ao atualizar usuário' })
+    }
+}
 
-module.exports = { listarUsuarios, buscarPorIdUsuarios, criarUsuario, atualizarUsuario, removerUsuario};
+/* =========================
+   REMOVER (SOFT DELETE)
+========================= */
+async function removerUsuario(req, res) {
+    try {
+        const id = parseInt(req.params.id)
+
+        const [result] = await db.execute(
+            'UPDATE usuarios SET ativo = false WHERE idUsuario = ? AND ativo = true',
+            [id]
+        )
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ erro: 'Usuário não encontrado ou já removido' })
+        }
+
+        res.json({ mensagem: 'Usuário removido com sucesso' })
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ erro: 'Erro ao remover usuário' })
+    }
+}
+
+module.exports = {
+    listarUsuarios,
+    buscarPorIdUsuarios,
+    criarUsuario,
+    atualizarUsuario,
+    removerUsuario
+}
