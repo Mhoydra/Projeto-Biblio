@@ -1,5 +1,6 @@
 console.log("renderer carregou")
 
+
 function mostrarTela(nome){
     document.querySelectorAll(".tela").forEach(t=>t.classList.remove("ativa"))
     document.getElementById(nome)?.classList.add("ativa")
