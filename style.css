@@ -205,14 +205,15 @@ flex:1;
 
 /* SIDEBAR */
 
-.sidebar{
+#sidebar{
+display: none;
 width:220px;
 background:#1f2937;
 color:white;
 padding:20px;
 }
 
-.sidebar button{
+#sidebar button{
 display:block;
 width:100%;
 margin-bottom:10px;
@@ -223,7 +224,7 @@ color:white;
 cursor:pointer;
 }
 
-.sidebar button:hover{
+#sidebar button:hover{
 background:#4b5563;
 }
 
@@ -267,4 +268,95 @@ background:#eee;
 form input{
 margin:5px;
 padding:8px;
+}
+
+/*   LOGIN / CADASTRO */
+
+/* Fundo centralizado só quando estiver no login/cadastro */
+#login.tela.ativa,
+#cadastro.tela.ativa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card */
+#login,
+#cadastro {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    margin: auto;
+}
+
+/* Inputs */
+#login input,
+#cadastro input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#login input:focus,
+#cadastro input:focus {
+    border-color: #374151;
+}
+
+/* Botão principal */
+#login button:not([data-tela]),
+#cadastro button:not([data-tela]) {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #374151;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#login button:not([data-tela]):hover,
+#cadastro button:not([data-tela]):hover {
+    background: #1f2937;
+}
+
+/* Botão secundário (troca de tela) */
+#login button[data-tela],
+#cadastro button[data-tela] {
+    background: transparent;
+    color: #374151;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#login button[data-tela]:hover,
+#cadastro button[data-tela]:hover {
+    text-decoration: underline;
+}
+
+/* Texto */
+#login p,
+#cadastro p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Erro */
+#erroLogin {
+    margin-top: 8px;
+    font-size: 13px;
+    color: red;
 }
